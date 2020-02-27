@@ -53,7 +53,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Webpack Boilerplate",
       template: "templates/index.ejs",
-      favicon: "templates/favicon.ico"
+      favicon: "templates/favicon.ico",
+      inject: false
     }),
 
     new MiniCssExtractPlugin({
