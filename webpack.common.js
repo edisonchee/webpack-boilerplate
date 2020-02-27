@@ -37,22 +37,12 @@ module.exports = {
         use: ["css-loader", "sass-loader"],
       },
       {
-        test: /\.(jpeg|jpg|gif|png)$/i,
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]",
-          outputPath: "images/",
-          publicPath: "images/"
-        }
+        test: /\.(png|jpe?g|gif)$/i,
+        use: ["file-loader"],
       },
       {
         test: /\.(eot|otf|svg|ttf|woff|woff2)$/i,
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]",
-          outputPath: "fonts/",
-          publicPath: "fonts/"
-        }
+        use: ["file-loader"],
       }
     ]
   },
