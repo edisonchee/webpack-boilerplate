@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: ["./src/app/index.js"],
+  entry: ["./src/app/index.js", "./src/app/css/style.css"],
 
   output: {
     filename: "js/bundle-[hash].js",
@@ -33,8 +33,8 @@ module.exports = {
         }
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: ["css-loader", "sass-loader"],
+        test: /\.s?css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -43,12 +43,21 @@ module.exports = {
       {
         test: /\.(eot|otf|svg|ttf|woff|woff2)$/i,
         use: ["file-loader"],
+      },
+      {
+        test: /\.(json)$/i,
+        use: ["file-loader"],
       }
     ]
   },
 
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
+
+    new CopyWebpackPlugin([{
+      from: 'src/app/assets',
+      to: 'assets'
+    }]),
 
     new HtmlWebpackPlugin({
       title: "Webpack Boilerplate",
