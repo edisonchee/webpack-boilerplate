@@ -3,6 +3,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 
@@ -54,17 +55,13 @@ module.exports = {
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
 
-    new CopyWebpackPlugin([{
-      from: 'src/app/assets',
-      to: 'assets'
-    }]),
-
-    new HtmlWebpackPlugin({
-      title: "Webpack Boilerplate",
-      template: "templates/index.ejs",
-      favicon: "templates/favicon.ico",
-      inject: false
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './src/app/assets', to: 'assets' }
+      ]
     }),
+
+    new HtmlWebpackPlugin(),
 
     new MiniCssExtractPlugin({
       filename: devMode ? "[name].css" : "[name].[hash].css",

@@ -1,15 +1,17 @@
-const merge = require("webpack-merge");
+const { merge } = require('webpack-merge');
 const common = require("./webpack.common.js");
 
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = merge(common, {
   mode: "production",
 
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['dist']
+    }),
 
     new CompressionPlugin({
       filename: "[path].gz[query]",
