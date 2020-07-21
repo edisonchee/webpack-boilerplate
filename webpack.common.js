@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: ["./src/app/index.js", "./src/app/css/style.css"],
+  entry: ["./src/app/index.js", "./src/app/scss/main.scss"],
 
   output: {
     filename: "js/bundle-[hash].js",
@@ -61,7 +61,10 @@ module.exports = {
       ]
     }),
 
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Title',
+      template: 'src/templates/index.html'
+    }),
 
     new MiniCssExtractPlugin({
       filename: devMode ? "[name].css" : "[name].[hash].css",
