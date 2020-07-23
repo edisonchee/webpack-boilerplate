@@ -44,10 +44,6 @@ module.exports = {
       {
         test: /\.(eot|otf|svg|ttf|woff|woff2)$/i,
         use: ["file-loader"],
-      },
-      {
-        test: /\.(json)$/i,
-        use: ["file-loader"],
       }
     ]
   },
