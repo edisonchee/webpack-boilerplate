@@ -5,10 +5,11 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: ["./src/app/index.js", "./src/app/scss/main.scss"],
+  entry: ["./src/app/index.ts", "./src/app/scss/main.scss"],
 
   output: {
     filename: "js/bundle-[hash].js",
@@ -24,13 +25,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.(ts|js)x?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
-          }
+            cacheDirectory: true
+          },
         }
       },
       {
@@ -65,6 +66,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? "[name].css" : "[name].[hash].css",
       chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
-    })
+    }),
+    
+    new ForkTsCheckerWebpackPlugin()
   ]
 };
