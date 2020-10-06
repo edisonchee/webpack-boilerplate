@@ -9,7 +9,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: ["./src/app/index.ts", "./src/app/scss/main.scss"],
+  entry: ["./src/app/index.ts", "./src/app/static/scss/main.scss"],
 
   output: {
     filename: "js/bundle-[hash].js",
@@ -54,13 +54,13 @@ module.exports = {
 
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/app/assets', to: 'assets' }
+        { from: './src/app/static/assets', to: 'assets' }
       ]
     }),
 
     new HtmlWebpackPlugin({
       title: 'Title',
-      template: 'src/templates/index.html'
+      template: 'src/app/static/templates/index.html'
     }),
 
     new MiniCssExtractPlugin({
